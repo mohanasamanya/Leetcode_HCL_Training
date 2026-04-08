@@ -1,0 +1,54 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+/*
+ * Complete the 'areBracketsProperlyMatched' function below.
+ *
+ * The function is expected to return a BOOLEAN.
+ * The function accepts STRING code_snippet as parameter.
+ */
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool areBracketsProperlyMatched(string s) {
+    stack<char> st;
+
+    for (char c : s) {
+        
+        if (c == '(' || c == '{' || c == '[') {
+            st.push(c);
+        }
+        
+        else if (c == ')' || c == '}' || c == ']') {
+            if (st.empty()) return false;
+
+            char top = st.top();
+            st.pop();
+
+            if ((c == ')' && top != '(') ||
+                (c == '}' && top != '{') ||
+                (c == ']' && top != '[')) {
+                return false;
+            }
+        }
+        
+        
+    }
+
+    return st.empty();
+}
+
+int main()
+{
+    string code_snippet;
+    getline(cin, code_snippet);
+
+    bool result = areBracketsProperlyMatched(code_snippet);
+
+    cout << result << "\n";
+
+    return 0;
+}
