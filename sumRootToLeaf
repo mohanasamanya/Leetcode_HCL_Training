@@ -1,0 +1,23 @@
+class Solution {
+public:
+     int ans = 0;
+     void traversal(TreeNode* root,int val){
+        if(root == NULL) return;
+        val = val*10;
+        val += root->val;
+        if(!root->left && !root->right){
+            ans = ans + val;
+            return;
+        }
+        traversal(root->left,val);
+        traversal(root->right,val);
+
+     }
+    int sumNumbers(TreeNode* root) {
+        if(root == NULL){
+            return 0;
+        }
+        traversal(root,0);
+        return ans;
+    }
+};
