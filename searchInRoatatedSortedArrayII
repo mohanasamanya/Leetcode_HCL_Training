@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool search(vector<int>& nums, int target) {
+        return helper(nums,0,nums.size()-1,target);
+    }
+    bool helper(vector<int>& nums,int low,int high,int target){
+        int n = nums.size();
+        if(low>high) return false;
+        int mid = low + (high - low)/2;
+        if(nums[mid]==target) return true;
+        if(nums[low] == nums[mid] && nums[mid]==nums[high]){
+            return helper(nums,low+1,high-1,target);
+        } 
+        
+        if(nums[low]<=nums[mid]){
+            if(target >= nums[low] && target < nums[mid]){
+                return helper(nums,low,mid-1,target);
+            }
+            else{
+                return helper(nums,mid+1,high,target);
+            }
+        }
+        else{
+            if(target > nums[mid] && target <= nums[high]){
+                return helper(nums,mid+1,high,target);
+            }
+            else{
+                return helper(nums,low,mid-1,target);
+            }
+        }
+    }
+};
